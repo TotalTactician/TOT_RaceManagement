@@ -1,0 +1,32 @@
+{
+  "Races": [
+    {
+      "name": "greenskins",
+      "Icon": "",
+      "factions": [
+        {
+          "name": "The Bloody Handz",
+          "Icon": ""
+        },
+        {
+          "name": "Broken Axe",
+          "Icon": ""
+        }
+      ]
+    },
+    {
+      "name": "Skaven",
+      "Icon": "",
+      "factions": [
+        {
+          "name": "Clan Skryre",
+          "Icon": ""
+        },
+        {
+          "name": "Clan Mors",
+          "Icon": ""
+        }
+      ]
+    }
+  ]
+} 
