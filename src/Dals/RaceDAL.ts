@@ -6,14 +6,11 @@ import { RACE } from "../Models/Race";
 export class RaceDAL implements IRaceDAL {
     public async getAllRaces() {
         
-        let races: any[] = [];
+        let races: IRace[] = [];
         
         try {
-            await mongoose.connect("mongodb://localhost:3600", {
-                dbName: "TOT_RaceManagementDB"
-            });
+            await mongoose.connect("mongodb://localhost:3600/TOT_RaceManagementDB");
             races = await RACE.find();
-            console.log(races);
         } 
         catch (e) {
             console.error(e)

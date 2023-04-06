@@ -15,7 +15,6 @@ app.use(bp.urlencoded({ extended: true }));
 // Handling get / Request
 app.get('/GetAll', async (req: Request, res: Response) => {
 	const races: IRace[]	= await DAL.getAllRaces();
-
 	res.status(200).json({
 		"Time": new Date().toUTCString(),
 		//read param
