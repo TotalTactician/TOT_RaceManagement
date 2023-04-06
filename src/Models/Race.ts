@@ -12,7 +12,8 @@ const RACESCHEMA = new Schema<IRace>({
             type: String,
             required: true
         }, 
-        icon: String
+        icon: String,
+        _id: false
     }]
 })
 

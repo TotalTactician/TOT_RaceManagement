@@ -1,4 +1,4 @@
-import mongoose, { Mongoose } from "mongoose";
+import mongoose from "mongoose";
 import { IRaceDAL } from "../Dal interfaces/IRaceDAL";
 import { IRace } from "../Model interfaces/IRace";
 import { RACE } from "../Models/Race";
@@ -10,7 +10,7 @@ export class RaceDAL implements IRaceDAL {
         
         try {
             await mongoose.connect("mongodb://localhost:3600/TOT_RaceManagementDB");
-            races = await RACE.find();
+            races = await RACE.find({}, '-_id -__v');
         } 
         catch (e) {
             console.error(e)
