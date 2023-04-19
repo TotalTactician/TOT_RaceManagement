@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "start": "npm run build && node build/server.js",
+    "start": "node build/server.js",
     "test": "mocha --require ts-node/register ./tests/**/*.test.ts",
     "seed": "npm run build && node build/seeding/seed.js"
   },
@@ -17,6 +17,7 @@
     "body-parser": "^1.20.2",
     "express": "^4.18.2",
     "mongoose": "^7.0.3",
+    "sinon": "^15.0.3",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.2"
   },
@@ -24,7 +25,10 @@
     "@types/chai": "^4.3.4",
     "@types/express": "^4.17.17",
     "@types/mocha": "^10.0.1",
+    "@types/sinon": "^10.0.13",
     "chai": "^4.3.7",
-    "mocha": "^10.2.0"
+    "chai-http": "^4.3.0",
+    "mocha": "^10.2.0",
+    "sinon-chai": "^3.7.0"
   }
 }

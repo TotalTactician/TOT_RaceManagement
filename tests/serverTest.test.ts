@@ -1,18 +1,37 @@
-import { expect } from "chai";
+import chai from "chai";
+import chaiHttp from "chai-http"
+import { APP } from "../src/server";
+const expect = chai.expect;
 
-class HelloWorld{
-    public returnHello() {
-        return "Hello World!";
-    }
-}
+chai.use(chaiHttp);
 
-describe('Test hello world', () => {
-    it('should do nothing', () => {
-        var hw = new HelloWorld();
-    })
+describe('/GetAll endpoint', () => {
 
-    it('should return "Hello World!"', () => {
-        var hw = new HelloWorld();
-        expect(hw.returnHello()).to.be.equal("Hello World!");
-    })
-})
+  it('should return a list of races with 200 status code', async () => {
+    // Make a request to the /GetAll endpoint
+    const res = await chai.request(APP).get('/GetAll');
+
+    // Check the response status code
+    expect(res).to.have.status(200);
+
+    // Check the response body
+    expect(res.body).to.have.property('Time');
+    expect(res.body).to.have.property('Races');
+    expect(res.body.Races).to.be.an('array');
+  });
+});
+
+describe('/ping endpoint', () => {
+
+    it('should return pong', async () => {
+      // Make a request to the /GetAll endpoint
+      const res = await chai.request(APP).get('/ping');
+  
+      // Check the response status code
+      expect(res).to.have.status(200);
+  
+      // Check the response body
+      expect(res.body).to.have.property('status');
+      expect(res.body.status).to.be.equal("Pong!");
+    });
+  });
