@@ -4,10 +4,13 @@ import { IRaceDAL } from './Dal interfaces/IRaceDAL';
 import { RaceDAL } from './Dals/RaceDAL';
 import { IRace } from './Model interfaces/IRace';
 
+require("dotenv").config();
+
 const BP = require('body-parser');
-export const APP: Application = express();
-const PORT: Number = 3500;
+const PORT: Number = Number(process.env.PORT) || 3500;
 const DAL: IRaceDAL = new RaceDAL();
+
+export const APP: Application = express();
 
 APP.use(BP.json());
 APP.use(BP.urlencoded({ extended: true }));

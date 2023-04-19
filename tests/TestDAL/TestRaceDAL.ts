@@ -1,10 +1,9 @@
 import { IRaceDAL } from  "../../src/Dal interfaces/IRaceDAL"
 import { IRace } from "../../src/Model interfaces/IRace";
 
-export class TestRaceDAL implements IRaceDAL {
-    getAllRaces(): PromiseLike<IRace[]> {
-        return new Promise<IRace[]>((resolve)  => {
-            resolve([
+export class TestRaceDAL {
+    async getAllRacesReturnList(): Promise<IRace[]> {
+            return [
                 {
                     name: "ab",
                     icon: "AB",
@@ -30,8 +29,11 @@ export class TestRaceDAL implements IRaceDAL {
                             name: "d",
                             icon: "D"
                         }]
-                }]);
-        });
+                }];
     }
+
+    async getAllRacesReturnEmptyList(): Promise<IRace[]> {
+        return [];
+}
 
 }
