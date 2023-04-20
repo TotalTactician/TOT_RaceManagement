@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "start": "node build/server.js",
-    "test": "mocha --require ts-node/register ./tests/**/*.test.ts",
+    "test": "mocha --require ts-node/register ./tests/**/*.test.ts --exit",
     "seed": "npm run build && node build/seeding/seed.js"
   },
   "keywords": [],
