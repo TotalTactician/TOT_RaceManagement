@@ -4,16 +4,19 @@ import { IRaceDAL } from './Dal interfaces/IRaceDAL';
 import { RaceDAL } from './Dals/RaceDAL';
 import { IRace } from './Model interfaces/IRace';
 
-const bp = require('body-parser');
-const app: Application = express();
-const PORT: Number = 3500;
+require("dotenv").config();
+
+const BP = require('body-parser');
+const PORT: Number = Number(process.env.PORT) || 3500;
 const DAL: IRaceDAL = new RaceDAL();
 
-app.use(bp.json());
-app.use(bp.urlencoded({ extended: true }));
+export const APP: Application = express();
+
+APP.use(BP.json());
+APP.use(BP.urlencoded({ extended: true }));
 
 // Handling get / Request
-app.get('/GetAll', async (req: Request, res: Response) => {
+APP.get('/GetAll', async (req: Request, res: Response) => {
 	const races: IRace[]	= await DAL.getAllRaces();
 	res.status(200).json({
 		"Time": new Date().toUTCString(),
@@ -22,8 +25,15 @@ app.get('/GetAll', async (req: Request, res: Response) => {
 	});
 })
 
+APP.get('/ping', (_req: Request, _res: Response) => {
+
+	_res.status(200).json({
+		"status": "Pong!"
+	});
+})
+
 // Server setup
-app.listen(PORT, () => {
+APP.listen(PORT, () => {
 	console.log('The application is listening '
 		+ 'on port http://localhost:' + PORT);
 })
