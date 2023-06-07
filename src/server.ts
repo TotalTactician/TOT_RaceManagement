@@ -1,24 +1,39 @@
 // Importing module
 import express, { Application, Request, Response } from 'express';
-import racesJson from './Races.json';
+import { IRaceDAL } from './Dal interfaces/IRaceDAL';
+import { RaceDAL } from './Dals/RaceDAL';
+import { IRace } from './Model interfaces/IRace';
 
-const bp = require('body-parser');
-const app: Application = express();
-const PORT: Number = 3500;
+require("dotenv").config();
 
-app.use(bp.json());
-app.use(bp.urlencoded({ extended: true }));
+const BP = require('body-parser');
+const PORT: Number = Number(process.env.PORT) || 3500;
+const DAL: IRaceDAL = new RaceDAL();
 
-// Handling post / Request
-app.get('/GetAll', (req: Request, res: Response) => {
+export const APP: Application = express();
+
+APP.use(BP.json());
+APP.use(BP.urlencoded({ extended: true }));
+
+// Handling get / Request
+APP.get('/GetAll', async (req: Request, res: Response) => {
+	const races: IRace[]	= await DAL.getAllRaces();
 	res.status(200).json({
 		"Time": new Date().toUTCString(),
-		"Races": racesJson.Races,
+		//read param
+		"Races": races
+	});
+})
+
+APP.get('/ping', (_req: Request, _res: Response) => {
+
+	_res.status(200).json({
+		"status": "Pong!"
 	});
 })
 
 // Server setup
-app.listen(PORT, () => {
+APP.listen(PORT, () => {
 	console.log('The application is listening '
 		+ 'on port http://localhost:' + PORT);
 })
